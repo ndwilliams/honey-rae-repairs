@@ -3,11 +3,17 @@ import { getAllEmployees } from "../../services/employeeService.js"
 
 export const Ticket = ({ ticket }) => {
 	const [employees, setEmployees] = useState([])
-	const [assignedEmployee, setAssignedEmployee] = useState({})
+	const [assignedEmployee, setAssignedEmployee] = useState({}) // useState("")
 
 	const getAndSetEmployees = () => {
 		getAllEmployees().then((employeesArray) => setEmployees(employeesArray))
 	}
+
+	// useEffect(() => {
+	//	if (ticket.employeeTickets.length) {
+	//		getEmployeeById(ticket.employeeTickets[0].id).then(
+	//  		(employee) => setAssignedEmployee(employee))}
+	//	}, [ticket])
 
 	useEffect(() => {
 		getAndSetEmployees()
