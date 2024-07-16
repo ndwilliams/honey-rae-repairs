@@ -27,7 +27,7 @@ export const TicketList = () => {
 	return (
 		<div className="tickets-container">
 			<h2>Tickets</h2>
-			<div>
+			<div className="filter-bar">
 				<button
 					className="filter-btn btn-primary"
 					onClick={() => {
@@ -42,6 +42,11 @@ export const TicketList = () => {
 					}}>
 					Show All
 				</button>
+				<input
+					type="text"
+					placeholder="Search Tickets"
+					className="ticket-search"
+				/>
 			</div>
 
 			<article className="tickets">
