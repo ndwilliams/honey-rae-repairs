@@ -8,6 +8,7 @@ export const TicketList = () => {
 	const [allTickets, setAllTickets] = useState([])
 	const [filteredTickets, setFilteredTickets] = useState([])
 	const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
+	const [searchTerm, setSearchTerm] = useState("")
 
 	useEffect(() => {
 		if (showEmergencyOnly) {
@@ -25,13 +26,19 @@ export const TicketList = () => {
 		})
 	}, []) // function = what we want to happen, array = when we want it to happen
 
+	useEffect(() => {
+		const foundTickets = allTickets.filter((ticket) =>
+			ticket.description.toLowerCase().includes(searchTerm.toLowerCase())
+		)
+		setFilteredTickets(foundTickets)
+	}, [searchTerm, allTickets])
+
 	return (
 		<div className="tickets-container">
 			<h2>Tickets</h2>
 			<TicketFilterBar
-				allTickets={allTickets}
+				setSearchTerm={setSearchTerm}
 				setShowEmergencyOnly={setShowEmergencyOnly}
-				setFilteredTickets={setFilteredTickets}
 			/>
 			<article className="tickets">
 				{filteredTickets.map((ticketObj) => {

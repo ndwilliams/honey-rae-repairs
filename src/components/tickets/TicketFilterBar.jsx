@@ -1,19 +1,4 @@
-import { useEffect, useState } from "react"
-
-export const TicketFilterBar = ({
-	allTickets,
-	setShowEmergencyOnly,
-	setFilteredTickets,
-}) => {
-	const [searchTerm, setSearchTerm] = useState("")
-
-	useEffect(() => {
-		const foundTickets = allTickets.filter((ticket) =>
-			ticket.description.toLowerCase().includes(searchTerm.toLowerCase())
-		)
-		setFilteredTickets(foundTickets)
-	}, [searchTerm, allTickets])
-
+export const TicketFilterBar = ({ setShowEmergencyOnly, setSearchTerm }) => {
 	return (
 		<div className="filter-bar">
 			<button
