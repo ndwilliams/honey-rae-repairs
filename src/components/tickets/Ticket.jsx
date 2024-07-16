@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
-import { getAllEmployees } from "../../services/employeeService.js"
+import { getAllEmployeesWhoAreAlsoUsers } from "../../services/employeeService.js"
 
 export const Ticket = ({ ticket }) => {
 	const [employees, setEmployees] = useState([])
 	const [assignedEmployee, setAssignedEmployee] = useState({}) // useState("")
 
 	const getAndSetEmployees = () => {
-		getAllEmployees().then((employeesArray) => setEmployees(employeesArray))
+		getAllEmployeesWhoAreAlsoUsers().then((employeesArray) =>
+			setEmployees(employeesArray)
+		)
 	}
 
 	// useEffect(() => {
