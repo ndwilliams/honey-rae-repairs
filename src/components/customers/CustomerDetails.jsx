@@ -6,15 +6,15 @@ import "./Customers.css"
 export const CustomerDetails = () => {
 	// /customers/3
 	// path="/customers/:customerId" --> customerId is the key, 3 is the value
-	const { customerId } = useParams() // {customerId : 3}
+	const { userId } = useParams() // {customerId : 3}
 	const [customer, setCustomer] = useState({})
 
 	useEffect(() => {
-		getCustomerByUserId(customerId).then((customerArray) => {
+		getCustomerByUserId(userId).then((customerArray) => {
 			const customerObj = customerArray[0]
 			setCustomer(customerObj)
 		})
-	}, [customerId])
+	}, [userId])
 
 	return (
 		<section className="customer">
