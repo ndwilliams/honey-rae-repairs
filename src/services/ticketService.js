@@ -4,3 +4,10 @@ export const getAllTickets = async () => {
 	)
 	return response.json()
 }
+
+export const getEmployeeTicketsByEmployeeId = async (employeeId) => {
+	const response = await fetch(
+		`http://localhost:8088/employeeTickets?employeeId=${employeeId}`
+	)
+	return response.json()
+}

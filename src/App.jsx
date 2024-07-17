@@ -6,6 +6,7 @@ import { TicketList } from "./components/tickets/TicketList"
 import { Navbar } from "./components/nav/Navbar"
 import { Welcome } from "./components/welcome/Welcome"
 import { CustomerDetails } from "./components/customers/CustomerDetails"
+import { EmployeeDetails } from "./components/employees/EmployeeDetails"
 
 export const App = () => {
 	return (
@@ -22,9 +23,12 @@ export const App = () => {
 				<Route path="tickets" element={<TicketList />} />
 				<Route path="customers">
 					<Route index element={<CustomerList />} />
-					<Route path=":customerId" element={<CustomerDetails />} />
+					<Route path=":userId" element={<CustomerDetails />} />
 				</Route>
-				<Route path="employees" element={<EmployeeList />} />
+				<Route path="employees">
+					<Route index element={<EmployeeList />} />
+					<Route path=":userId" element={<EmployeeDetails />} />
+				</Route>
 			</Route>
 		</Routes>
 	)
