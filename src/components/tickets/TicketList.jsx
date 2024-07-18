@@ -4,7 +4,7 @@ import { Ticket } from "./Ticket.jsx"
 import "./Tickets.css"
 import { TicketFilterBar } from "./TicketFilterBar.jsx"
 
-export const TicketList = () => {
+export const TicketList = ({ currentUser }) => {
 	const [allTickets, setAllTickets] = useState([])
 	const [filteredTickets, setFilteredTickets] = useState([])
 	const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
@@ -42,7 +42,13 @@ export const TicketList = () => {
 			/>
 			<article className="tickets">
 				{filteredTickets.map((ticketObj) => {
-					return <Ticket ticket={ticketObj} key={ticketObj.id} />
+					return (
+						<Ticket
+							ticket={ticketObj}
+							key={ticketObj.id}
+							currentUser={currentUser}
+						/>
+					)
 				})}
 			</article>
 		</div>

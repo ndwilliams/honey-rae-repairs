@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllEmployeesWhoAreAlsoUsers } from "../../services/employeeService.js"
 
-export const Ticket = ({ ticket }) => {
+export const Ticket = ({ ticket, currentUser }) => {
 	const [employees, setEmployees] = useState([])
 	const [assignedEmployee, setAssignedEmployee] = useState({}) // useState("")
 
@@ -42,6 +42,14 @@ export const Ticket = ({ ticket }) => {
 				<div>
 					<div className="ticket-info">emergency</div>
 					<div>{ticket.emergency ? "yes" : "no"}</div>
+				</div>
+				<div className="btn-container">
+					{/* If the logged in user is an employee and 
+					there's no employee ticket associated with the service ticket,
+					we want to render a button to claim the ticket */}
+					{/* If the logged in user is the assigned employee for the ticket,
+					and there is not dateCompleted, then we want to render a button to 
+					close the ticket */}
 				</div>
 			</footer>
 		</section>
