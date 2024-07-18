@@ -7,10 +7,15 @@ import { Navbar } from "./components/nav/Navbar"
 import { Welcome } from "./components/welcome/Welcome"
 import { CustomerDetails } from "./components/customers/CustomerDetails"
 import { EmployeeDetails } from "./components/employees/EmployeeDetails"
+import { Login } from "./components/auth/Login"
+import { Register } from "./components/auth/Register"
 
 export const App = () => {
 	return (
 		<Routes>
+			<Route path="/login" element={<Login />} />
+			<Route path="/register" element={<Register />} />
+
 			<Route
 				path="/"
 				element={
