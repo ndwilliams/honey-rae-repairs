@@ -10,6 +10,12 @@ export const TicketList = ({ currentUser }) => {
 	const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
 	const [searchTerm, setSearchTerm] = useState("")
 
+	const getAndSetAllTickets = () => {
+		getAllTickets().then((ticketsArray) => {
+			setAllTickets(ticketsArray)
+		})
+	}
+
 	useEffect(() => {
 		if (showEmergencyOnly) {
 			const emergencyTickets = allTickets.filter((ticket) => ticket.emergency)
@@ -20,10 +26,7 @@ export const TicketList = ({ currentUser }) => {
 	}, [showEmergencyOnly, allTickets])
 
 	useEffect(() => {
-		getAllTickets().then((ticketsArray) => {
-			setAllTickets(ticketsArray)
-			console.log("tickets set")
-		})
+		getAndSetAllTickets()
 	}, []) // function = what we want to happen, array = when we want it to happen
 
 	useEffect(() => {
@@ -47,6 +50,7 @@ export const TicketList = ({ currentUser }) => {
 							ticket={ticketObj}
 							key={ticketObj.id}
 							currentUser={currentUser}
+							getAndSetAllTickets={getAndSetAllTickets}
 						/>
 					)
 				})}

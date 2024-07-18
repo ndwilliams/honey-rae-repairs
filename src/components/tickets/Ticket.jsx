@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { getAllEmployeesWhoAreAlsoUsers } from "../../services/employeeService.js"
+import { assignTicket, updateTicket } from "../../services/ticketService.js"
 
-export const Ticket = ({ ticket, currentUser }) => {
+export const Ticket = ({ ticket, currentUser, getAndSetAllTickets }) => {
 	const [employees, setEmployees] = useState([])
 	const [assignedEmployee, setAssignedEmployee] = useState({}) // useState("")
 
@@ -28,6 +29,36 @@ export const Ticket = ({ ticket, currentUser }) => {
 		setAssignedEmployee(foundEmployee)
 	}, [employees, ticket])
 
+	const handleClaim = () => {
+		// find currentUser's employeeId
+		const currentEmployee = employees.find(
+			(employee) => employee.userId === currentUser.id
+		)
+		// create employee ticket object
+		const newEmployeeTicket = {
+			employeeId: currentEmployee.id,
+			serviceTicketId: ticket.id,
+		}
+
+		assignTicket(newEmployeeTicket).then(() => {
+			getAndSetAllTickets()
+		})
+	}
+
+	const handleClose = () => {
+		const closedTicket = {
+			id: ticket.id,
+			userId: ticket.userId,
+			description: ticket.description,
+			emergency: ticket.emergency,
+			dateCompleted: new Date(),
+		}
+
+		updateTicket(closedTicket).then(() => {
+			getAndSetAllTickets()
+		})
+	}
+
 	return (
 		<section className="ticket">
 			<header className="ticket-info">#{ticket.id}</header>
@@ -48,7 +79,9 @@ export const Ticket = ({ ticket, currentUser }) => {
 					there's no employee ticket associated with the service ticket,
 					we want to render a button to claim the ticket */}
 					{currentUser.isStaff && !assignedEmployee ? (
-						<button className="btn btn-secondary">Claim</button>
+						<button className="btn btn-secondary" onClick={handleClaim}>
+							Claim
+						</button>
 					) : (
 						""
 					)}
@@ -59,7 +92,9 @@ export const Ticket = ({ ticket, currentUser }) => {
 
 					{assignedEmployee?.userId === currentUser.id &&
 					!ticket.dateCompleted ? (
-						<button className="btn btn-warning">Close</button>
+						<button className="btn btn-warning" onClick={handleClose}>
+							Close
+						</button>
 					) : (
 						""
 					)}
