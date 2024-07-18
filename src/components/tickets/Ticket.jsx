@@ -47,9 +47,22 @@ export const Ticket = ({ ticket, currentUser }) => {
 					{/* If the logged in user is an employee and 
 					there's no employee ticket associated with the service ticket,
 					we want to render a button to claim the ticket */}
+					{currentUser.isStaff && !assignedEmployee ? (
+						<button className="btn btn-secondary">Claim</button>
+					) : (
+						""
+					)}
+
 					{/* If the logged in user is the assigned employee for the ticket,
 					and there is not dateCompleted, then we want to render a button to 
 					close the ticket */}
+
+					{assignedEmployee?.userId === currentUser.id &&
+					!ticket.dateCompleted ? (
+						<button className="btn btn-warning">Close</button>
+					) : (
+						""
+					)}
 				</div>
 			</footer>
 		</section>
