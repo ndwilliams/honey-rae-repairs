@@ -10,7 +10,10 @@ export const EmployeeForm = ({ currentUser }) => {
 	// Want to be able to edit the specialty and the rate
 	// Can get current values through userId in local storage
 	// and fetching corresponding employee object/data
-	const [employee, setEmployee] = useState({})
+	const [employee, setEmployee] = useState({
+		specialty: "",
+		rate: 0,
+	})
 
 	const navigate = useNavigate()
 
@@ -20,6 +23,12 @@ export const EmployeeForm = ({ currentUser }) => {
 			setEmployee(employeeObj)
 		})
 	}, [currentUser])
+
+	const handleInputChange = (event) => {
+		const stateCopy = { ...employee }
+		stateCopy[event.target.name] = event.target.value
+		setEmployee(stateCopy)
+	}
 
 	const handleSave = (event) => {
 		event.preventDefault()
@@ -45,12 +54,9 @@ export const EmployeeForm = ({ currentUser }) => {
 					<label>Specialty:</label>
 					<input
 						type="text"
-						value={employee?.specialty}
-						onChange={(event) => {
-							const copy = { ...employee }
-							copy.specialty = event.target.value
-							setEmployee(copy)
-						}}
+						name="specialty"
+						value={employee?.specialty ? employee.specialty : ""}
+						onChange={handleInputChange}
 						required
 						className="form-control"
 					/>
@@ -61,12 +67,9 @@ export const EmployeeForm = ({ currentUser }) => {
 					<label>Hourly Rate:</label>
 					<input
 						type="number"
-						value={employee?.rate}
-						onChange={(event) => {
-							const copy = { ...employee }
-							copy.rate = event.target.value
-							setEmployee(copy)
-						}}
+						name="rate"
+						value={employee?.rate ? employee.rate : ""}
+						onChange={handleInputChange}
 						required
 						className="form-control"
 					/>
