@@ -17,7 +17,7 @@ export const getEmployeeByUserId = async (userId) => {
 
 // export const getEmployeeById = async (employeeId) => {
 // 	const response = await fetch(
-// 		`http://localhost:8088/${employeeId}?_expand=user`
+// 		`http://localhost:8088/employees/${employeeId}?_expand=user`
 // 	)
 // 	return response.json()
 // }
