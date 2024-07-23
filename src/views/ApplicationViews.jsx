@@ -40,6 +40,7 @@ export const ApplicationViews = () => {
 					<Route index element={<EmployeeList />} />
 					<Route path=":userId" element={<EmployeeDetails />} />
 				</Route>
+				<Route path="/profile" element={<>Profile</>} />
 			</Route>
 		</Routes>
 	)
