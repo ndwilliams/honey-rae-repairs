@@ -15,9 +15,23 @@ export const getEmployeeByUserId = async (userId) => {
 	return response.json()
 }
 
+export const updateEmployee = async (employee) => {
+	const response = await fetch(
+		`http://localhost:8088/employees/${employee.id}`,
+		{
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify(employee),
+		}
+	)
+	return response
+}
+
 // export const getEmployeeById = async (employeeId) => {
 // 	const response = await fetch(
-// 		`http://localhost:8088/${employeeId}?_expand=user`
+// 		`http://localhost:8088/employees/${employeeId}?_expand=user`
 // 	)
 // 	return response.json()
 // }
