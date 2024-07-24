@@ -34,7 +34,7 @@ export const TicketList = ({ currentUser }) => {
 
 	useEffect(() => {
 		getAndSetAllTickets()
-	}, []) // function = what we want to happen, array = when we want it to happen
+	}, [currentUser]) // function = what we want to happen, array = when we want it to happen
 
 	useEffect(() => {
 		const foundTickets = allTickets.filter((ticket) =>
