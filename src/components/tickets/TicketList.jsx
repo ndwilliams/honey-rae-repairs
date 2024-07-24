@@ -12,7 +12,14 @@ export const TicketList = ({ currentUser }) => {
 
 	const getAndSetAllTickets = () => {
 		getAllTickets().then((ticketsArray) => {
-			setAllTickets(ticketsArray)
+			if (currentUser.isStaff) {
+				setAllTickets(ticketsArray)
+			} else {
+				const customerTickets = ticketsArray.filter(
+					(ticket) => ticket.userId === currentUser.id
+				)
+				setAllTickets(customerTickets)
+			}
 		})
 	}
 
@@ -27,7 +34,7 @@ export const TicketList = ({ currentUser }) => {
 
 	useEffect(() => {
 		getAndSetAllTickets()
-	}, []) // function = what we want to happen, array = when we want it to happen
+	}, [currentUser]) // function = what we want to happen, array = when we want it to happen
 
 	useEffect(() => {
 		const foundTickets = allTickets.filter((ticket) =>
