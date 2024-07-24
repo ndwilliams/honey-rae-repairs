@@ -1,6 +1,6 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import { Navbar } from "../components/nav/Navbar"
 import { Welcome } from "../components/welcome/Welcome"
+import { CustomerNav } from "../components/nav/CustomerNav"
 
 export const CustomerViews = () => {
 	return (
@@ -9,7 +9,7 @@ export const CustomerViews = () => {
 				path="/"
 				element={
 					<>
-						{/* <Navbar /> */}
+						<CustomerNav />
 						<Outlet />
 					</>
 				}>
