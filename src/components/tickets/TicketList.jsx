@@ -12,7 +12,14 @@ export const TicketList = ({ currentUser }) => {
 
 	const getAndSetAllTickets = () => {
 		getAllTickets().then((ticketsArray) => {
-			setAllTickets(ticketsArray)
+			if (currentUser.isStaff) {
+				setAllTickets(ticketsArray)
+			} else {
+				const customerTickets = ticketsArray.filter(
+					(ticket) => ticket.userId === currentUser.id
+				)
+				setAllTickets(customerTickets)
+			}
 		})
 	}
 
