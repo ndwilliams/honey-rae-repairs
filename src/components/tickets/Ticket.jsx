@@ -63,8 +63,8 @@ export const Ticket = ({ ticket, currentUser, getAndSetAllTickets }) => {
 		})
 	}
 
-	const handleDelete = async (joke) => {
-		await deleteTicket(joke)
+	const handleDelete = async () => {
+		await deleteTicket(ticket)
 		getAndSetAllTickets()
 	}
 
@@ -108,12 +108,8 @@ export const Ticket = ({ ticket, currentUser, getAndSetAllTickets }) => {
 						""
 					)}
 					{!currentUser.isStaff ? (
-						<button
-							className="btn btn-warning"
-							onClick={() => {
-								handleDelete
-							}}>
-							Delete Ticket
+						<button className="btn btn-warning" onClick={handleDelete}>
+							Delete
 						</button>
 					) : (
 						""
