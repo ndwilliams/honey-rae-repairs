@@ -49,6 +49,7 @@ export const TicketList = ({ currentUser }) => {
 			<TicketFilterBar
 				setSearchTerm={setSearchTerm}
 				setShowEmergencyOnly={setShowEmergencyOnly}
+				currentUser={currentUser}
 			/>
 			<article className="tickets">
 				{filteredTickets.map((ticketObj) => {
