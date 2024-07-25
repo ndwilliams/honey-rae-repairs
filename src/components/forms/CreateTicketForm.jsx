@@ -1,8 +1,27 @@
 import { useState } from "react"
+import { createTicket } from "../../services/ticketService"
+import { useNavigate } from "react-router-dom"
 import "./Form.css"
 
 export const CreateTicketForm = ({ currentUser }) => {
 	const [ticket, setTicket] = useState({ description: "", emergency: false })
+	const navigate = useNavigate()
+
+	const handleSave = async () => {
+		if (ticket.description) {
+			const newTicket = {
+				userId: currentUser.id,
+				description: ticket.description,
+				emergency: ticket.emergency,
+				dateCompleted: "",
+			}
+
+			await createTicket(newTicket)
+			navigate(`/tickets`)
+		} else {
+			window.alert("Please fill out the description")
+		}
+	}
 
 	return (
 		<form>
@@ -39,7 +58,9 @@ export const CreateTicketForm = ({ currentUser }) => {
 			</fieldset>
 			<fieldset>
 				<div className="form-group">
-					<button className="form-btn btn-info">Submit Ticket</button>
+					<button className="form-btn btn-info" onClick={handleSave}>
+						Submit Ticket
+					</button>
 				</div>
 			</fieldset>
 		</form>
