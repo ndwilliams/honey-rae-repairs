@@ -9,6 +9,7 @@ export const TicketList = ({ currentUser }) => {
 	const [filteredTickets, setFilteredTickets] = useState([])
 	const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
 	const [searchTerm, setSearchTerm] = useState("")
+	const [showOpenTicketsOnly, setShowOpenTicketsOnly] = useState(false)
 
 	const getAndSetAllTickets = () => {
 		getAllTickets().then((ticketsArray) => {
@@ -33,6 +34,15 @@ export const TicketList = ({ currentUser }) => {
 	}, [showEmergencyOnly, allTickets])
 
 	useEffect(() => {
+		if (showOpenTicketsOnly) {
+			const openTickets = allTickets.filter((ticket) => !ticket.dateCompleted)
+			setFilteredTickets(openTickets)
+		} else {
+			setFilteredTickets(allTickets)
+		}
+	}, [allTickets, showOpenTicketsOnly])
+
+	useEffect(() => {
 		getAndSetAllTickets()
 	}, [currentUser]) // function = what we want to happen, array = when we want it to happen
 
@@ -49,6 +59,7 @@ export const TicketList = ({ currentUser }) => {
 			<TicketFilterBar
 				setSearchTerm={setSearchTerm}
 				setShowEmergencyOnly={setShowEmergencyOnly}
+				setShowOpenTicketsOnly={setShowOpenTicketsOnly}
 				currentUser={currentUser}
 			/>
 			<article className="tickets">
