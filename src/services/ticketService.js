@@ -36,3 +36,11 @@ export const updateTicket = async (ticket) => {
 	)
 	return response
 }
+
+export const deleteTicket = async (ticket) => {
+	const response = await fetch(
+		`http://localhost:8088/serviceTickets/${ticket.id}`,
+		{ method: "DELETE" }
+	)
+	return response
+}
