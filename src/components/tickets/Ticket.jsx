@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { getAllEmployeesWhoAreAlsoUsers } from "../../services/employeeService.js"
-import { assignTicket, updateTicket } from "../../services/ticketService.js"
+import {
+	assignTicket,
+	deleteTicket,
+	updateTicket,
+} from "../../services/ticketService.js"
 
 export const Ticket = ({ ticket, currentUser, getAndSetAllTickets }) => {
 	const [employees, setEmployees] = useState([])
@@ -59,6 +63,11 @@ export const Ticket = ({ ticket, currentUser, getAndSetAllTickets }) => {
 		})
 	}
 
+	const handleDelete = async (joke) => {
+		await deleteTicket(joke)
+		getAndSetAllTickets()
+	}
+
 	return (
 		<section className="ticket">
 			<header className="ticket-info">#{ticket.id}</header>
@@ -94,6 +103,17 @@ export const Ticket = ({ ticket, currentUser, getAndSetAllTickets }) => {
 					!ticket.dateCompleted ? (
 						<button className="btn btn-warning" onClick={handleClose}>
 							Close
+						</button>
+					) : (
+						""
+					)}
+					{!currentUser.isStaff ? (
+						<button
+							className="btn btn-warning"
+							onClick={() => {
+								handleDelete
+							}}>
+							Delete Ticket
 						</button>
 					) : (
 						""
