@@ -1,6 +1,9 @@
+import { useState } from "react"
 import "./Form.css"
 
 export const CreateTicketForm = ({ currentUser }) => {
+	const [ticket, setTicket] = useState({ description: "", emergency: false })
+
 	return (
 		<form>
 			<h2>New Service Ticket</h2>
@@ -11,6 +14,11 @@ export const CreateTicketForm = ({ currentUser }) => {
 						type="text"
 						className="form-control"
 						placeholder="Brief description of problem"
+						onChange={(event) => {
+							const ticketCopy = { ...ticket }
+							ticketCopy.description = event.target.value
+							setTicket(ticketCopy)
+						}}
 					/>
 				</div>
 			</fieldset>
@@ -18,7 +26,14 @@ export const CreateTicketForm = ({ currentUser }) => {
 				<div className="form-group">
 					<label>
 						Emergency:
-						<input type="checkbox" />
+						<input
+							type="checkbox"
+							onChange={(event) => {
+								const ticketCopy = { ...ticket }
+								ticketCopy.emergency = event.target.checked
+								setTicket(ticketCopy)
+							}}
+						/>
 					</label>
 				</div>
 			</fieldset>
