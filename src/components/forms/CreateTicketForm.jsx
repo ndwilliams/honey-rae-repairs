@@ -7,7 +7,9 @@ export const CreateTicketForm = ({ currentUser }) => {
 	const [ticket, setTicket] = useState({ description: "", emergency: false })
 	const navigate = useNavigate()
 
-	const handleSave = async () => {
+	const handleSave = async (event) => {
+		event.preventDefault()
+
 		if (ticket.description) {
 			const newTicket = {
 				userId: currentUser.id,
